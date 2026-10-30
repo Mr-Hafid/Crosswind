@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-msvc, aarch64-linux-android, riscv32imc-unknown-none-elf
+      - name: Allow user namespaces
+        run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+      - run: cargo build --workspace --locked
+      - run: cargo test --workspace --locked
+      - run: cargo check --locked --target x86_64-pc-windows-msvc -p crosswind-awdl -p crosswind-airdrop --all-features
+      - run: cargo check --locked --target aarch64-linux-android -p crosswind-awdl -p crosswind-airdrop --all-features
+      - run: cargo check --locked --target riscv32imc-unknown-none-elf -p crosswind-awdl
+      - run: cargo check --locked -p crosswind-airdrop --no-default-features
+
+  hwsim:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install the radios
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq iw hostapd "linux-modules-extra-$(uname -r)"
+      - run: cargo test --locked -p crosswind-radio --test hwsim --config "target.'cfg(all())'.runner = 'sudo CROSSWIND_HWSIM=1'" -- --nocapture
+
+  portable:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo build --locked
+      - run: cargo test --locked -p crosswind-core -p crosswind-awdl -p crosswind-cli --all-features
+      - run: cargo test --locked -p crosswind-airdrop --lib --test vectors

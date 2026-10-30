@@ -1,0 +1,6 @@
+# D-Bus starts crosswindd through systemd on the first call to it.
+[D-BUS Service]
+Name=io.github.mrhafid.Crosswind
+Exec=/bin/false
+User=root
+SystemdService=crosswindd.service
