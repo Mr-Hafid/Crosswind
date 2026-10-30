@@ -3,3 +3,4 @@
 *.pcap
 *.pcapng
 !tests/captures/*.pcap
+/docs
