@@ -16,8 +16,6 @@ Crosswind tidak berafiliasi dengan dan tidak didukung oleh Apple Inc. AirDrop ad
 | Android | inti AWDL dan AirDrop terkompilasi | belum ada jalur driver WiFi |
 | ESP32 | inti AWDL terkompilasi (`riscv32imc`, no_std) | dongle belum dibuat |
 
-Temuan sejauh ini dan urutan eksperimen ada di [docs/RESEARCH.md](docs/RESEARCH.md). Protokol di level kabel dijelaskan di [docs/SPEC.md](docs/SPEC.md).
-
 ## Kenapa sulit
 
 iPhone hanya mencari penerima AirDrop lewat Bluetooth LE dan AWDL, jalur WiFi peer-to-peer milik Apple. Berada di jaringan WiFi yang sama tidak membantu. Penerima harus bisa menjalankan AWDL, dan itu butuh kartu WiFi yang mendukung mode monitor dan frame injection.
@@ -64,7 +62,7 @@ crosswind-linux receive --dir ~/Downloads
 | `crosswindd` | Service sistem yang memegang radio dan menyediakannya lewat D-Bus | Linux |
 | `crosswind-linux` | Perintah `crosswind-linux`: radio, doctor, test-card, capture, BLE lewat BlueZ | Linux |
 
-Folder `docs/` berisi spesifikasi protokol, `hardware/` laporan kartu WiFi, `tests/captures/` rekaman iPhone asli untuk tes replay, dan `packaging/` file systemd, D-Bus, dan NetworkManager.
+Folder `hardware/` berisi laporan kartu WiFi, `tests/captures/` rekaman iPhone asli untuk tes replay, dan `packaging/` file systemd, D-Bus, dan NetworkManager.
 
 `cargo build` hanya membangun crate yang jalan di semua platform. Tambahkan `--workspace` di Linux untuk sisanya.
 

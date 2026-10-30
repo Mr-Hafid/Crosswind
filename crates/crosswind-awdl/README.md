@@ -4,7 +4,7 @@ AWDL (Apple Wireless Direct Link), the Wi-Fi link AirDrop runs over, as a sans-I
 
 `Node` takes what the radio received, the IPv6 packets the host wants sent and timer expiries, each with the time, and returns what to do: transmit a frame, arm the timer, add or remove a peer, deliver a packet. It does no I/O and reads no clock, so it runs the same from tests, captures and simulations as on a radio. It's `no_std`, with `alloc`.
 
-The modules follow §3 of [docs/SPEC.md](../../docs/SPEC.md): `frame`, `tlv`, `sync`, `election`, `channel`, `peer`, `ip` and `rate`.
+The modules are `frame`, `tlv`, `sync`, `election`, `channel`, `peer`, `ip` and `rate`.
 
 ## The driver
 

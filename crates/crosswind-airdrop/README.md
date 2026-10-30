@@ -10,8 +10,6 @@ The driver doesn't choose rustls's crypto provider: the application installs one
 
 The receiver works in Everyone mode. Contacts Only needs an Apple identity, which this crate doesn't do.
 
-[docs/SPEC.md](../../docs/SPEC.md) says what it implements on the wire.
-
 ## Status
 
 On 0.x until Crosswind 1.0: the API can change between minor versions.
