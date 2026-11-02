@@ -4,3 +4,4 @@
 *.pcapng
 !tests/captures/*.pcap
 /docs
+/apps/crosswind-app/src-tauri/gen/schemas

@@ -1,11 +1,12 @@
 [workspace]
 resolver = "3"
-members = ["crates/*"]
+members = ["crates/*", "apps/crosswind-app/src-tauri"]
 default-members = [
     "crates/crosswind-core",
     "crates/crosswind-awdl",
     "crates/crosswind-airdrop",
     "crates/crosswind-cli",
+    "apps/crosswind-app/src-tauri",
 ]
 
 [workspace.package]

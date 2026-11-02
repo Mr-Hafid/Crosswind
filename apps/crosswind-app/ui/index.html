@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Crosswind</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="flying-card.css" />
+  </head>
+  <body>
+    <canvas id="in-app-glow" class="in-app-glow" aria-hidden="true"></canvas>
+    <div id="in-app-cards" class="card-layer" aria-hidden="true"></div>
+
+    <main class="app">
+      <section class="status" aria-live="polite">
+        <div class="status-line">
+          <span id="status-dot" class="status-dot" aria-hidden="true"></span>
+          <span id="status-title" class="status-title">Not receiving</span>
+        </div>
+        <p id="status-detail" class="status-detail">Start receiving so nearby iPhones can find this device in AirDrop.</p>
+        <button id="toggle-receiving" class="primary-button" type="button">Start receiving</button>
+        <p id="status-error" class="status-error" role="alert" hidden></p>
+      </section>
+
+      <section id="incoming-section" class="incoming" hidden>
+        <h2 class="section-title">Wants to send</h2>
+        <ul id="incoming-list" class="incoming-list"></ul>
+      </section>
+
+      <section class="received">
+        <h2 class="section-title">Received</h2>
+        <ul id="received-list" class="received-list"></ul>
+        <p id="received-empty" class="empty-state">Nothing received yet. On the iPhone, set AirDrop to "Everyone for 10 minutes", then share a file and pick this device.</p>
+      </section>
+
+      <details class="settings">
+        <summary>Settings</summary>
+        <label class="field">
+          <span class="field-label">Network interface</span>
+          <select id="interface-select"></select>
+          <span class="field-hint">awdl0 is the AirDrop link. On Linux it appears after <code>crosswind-linux radio up</code>.</span>
+        </label>
+        <label class="field">
+          <span class="field-label">Save files to</span>
+          <input id="download-dir" type="text" spellcheck="false" />
+        </label>
+        <label class="toggle">
+          <input id="auto-accept" type="checkbox" />
+          <span>Accept everything without asking</span>
+        </label>
+        <label id="launch-at-login-row" class="toggle">
+          <input id="launch-at-login" type="checkbox" />
+          <span>Open Crosswind when you log in</span>
+        </label>
+        <label class="toggle">
+          <input id="show-file-card" type="checkbox" />
+          <span>Show the incoming file in the middle of the screen</span>
+        </label>
+        <label class="field">
+          <span class="field-label">Glow comes from the</span>
+          <select id="peer-side">
+            <option value="right">Right edge</option>
+            <option value="left">Left edge</option>
+          </select>
+        </label>
+        <button id="preview-glow" class="secondary-button" type="button">Preview the glow</button>
+      </details>
+    </main>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>

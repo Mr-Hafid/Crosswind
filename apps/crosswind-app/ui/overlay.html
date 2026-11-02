@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Crosswind Glow</title>
+    <link rel="stylesheet" href="flying-card.css" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: transparent;
+      }
+      #screen-glow,
+      #screen-cards {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+      #screen-glow {
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="screen-glow"></canvas>
+    <div id="screen-cards"></div>
+    <script type="module" src="overlay.js"></script>
+  </body>
+</html>

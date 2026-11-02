@@ -1,8 +1,9 @@
 use std::io;
 use std::net::Ipv6Addr;
 
-use crosswind_core::Platform;
+use crate::Platform;
 
+#[derive(Debug, Clone)]
 pub struct LinkInterface {
     pub name: String,
     pub index: u32,
@@ -10,6 +11,24 @@ pub struct LinkInterface {
 }
 
 impl LinkInterface {
+    pub fn list_usable() -> Vec<Self> {
+        netdev::get_interfaces()
+            .into_iter()
+            .filter_map(|network_interface| {
+                let link_local_addr = network_interface
+                    .ipv6
+                    .iter()
+                    .map(|network| network.addr())
+                    .find(|ip| is_link_local(*ip))?;
+                Some(LinkInterface {
+                    name: network_interface.name,
+                    index: network_interface.index,
+                    link_local_addr,
+                })
+            })
+            .collect()
+    }
+
     pub fn lookup(name: &str) -> io::Result<Self> {
         let network_interface = netdev::get_interfaces()
             .into_iter()

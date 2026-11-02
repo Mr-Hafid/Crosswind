@@ -1,5 +1,4 @@
 mod airdrop;
-mod interface;
 
 use std::process::ExitCode;
 

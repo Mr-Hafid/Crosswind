@@ -14,7 +14,7 @@ use crosswind_airdrop::proto::receiver::Config;
 use crosswind_airdrop::proto::sender::{self, Outcome};
 use tokio::io::AsyncBufReadExt;
 
-use crate::interface::{LinkInterface, default_interface_name};
+use crosswind_core::link::{LinkInterface, default_interface_name};
 
 const RECEIVE_PORT: u16 = 8771;
 const ASK_TIMEOUT: Duration = Duration::from_secs(15);
